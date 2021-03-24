@@ -1,0 +1,131 @@
+{% extends 'index.html' %}
+{% block title %}All Approvel{% endblock title %}
+{% block sidenavbar %}
+<!-- Vertical navbar -->
+<div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person mr-3 rounded-circle img-thumbnail shadow-sm" viewBox="0 0 16 16">
+  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+</svg>
+
+      <div class="media-body">
+          <a href="/adminprofile/" class="text-dark"><h4 class="m-0">{{ data }}</h4></a>
+        <p class="font-weight-normal text-muted mb-0">{{ut}}</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="/" class="nav-link text-dark bg-light">
+                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                home
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                about
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="/viewnewrequest/" class="nav-link text-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-x-fillb text-primary" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+              </svg>
+                New Request User <span class="badge badge-danger">{{ tn }}</span>
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="/viewapprovel/" class="nav-link text-dark">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-check-fill text-primary" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+</svg>
+                All Approvel User
+            </a>
+    </li>
+      <li class="nav-item">
+      <a href="/alluser/" class="nav-link text-dark text-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-lines-fill text-primary" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+</svg>
+                All User
+            </a>
+    </li>
+       <li class="nav-item">
+      <a href="/loginhistory" class="nav-link text-dark text-dark">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-open-fill text-primary" viewBox="0 0 16 16">
+  <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+</svg>
+                Login History
+            </a>
+    </li>
+      <li class="nav-item">
+      <a href="/newraisedticketadmin/" class="nav-link text-dark">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                New Raised Ticket <span class="badge badge-danger">{{ nt }}</span>
+            </a>
+    </li>
+      <li class="nav-item">
+      <a href="/showclosedticketadmin/" class="nav-link text-dark">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                Closed Ticket <span class="badge badge-danger">{{ ct }}</span>
+            </a>
+        </li>
+      <li class="nav-item">
+      <a href="/logout/" class="nav-link text-dark">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left text-primary" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                  <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                </svg>
+                Log Out
+            </a>
+    </li>
+  </ul>
+</div>
+<!-- End vertical navbar -->
+{% endblock sidenavbar %}
+{% block item %}
+<h3>All Active Users</h3>
+  <table class="table table-striped shadow table-fixed">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th >User Name</th>
+      <th>Gender</th>
+      <th>Gmail</th>
+      <th>Password</th>
+      <th>User-Type</th>
+      <th>Approved_By</th>
+      <th>Approved_Date</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in all_apr %}
+    {% if i.approved_by and i.revoked_by == None %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td >{{ i.first_name}} {{ i.mid_name}} {{ i.last_name }}</td>
+      <td>{{ i.gender }}</td>
+      <td>{{ i.email }}</td>
+      <td>{{ i.password }}</td>
+      <td>{{ i.user_type}}</td>
+        <td><a href="/adminpage/{{i.approved_by}}/">ID-{{ i.approved_by}}</a></td>
+      <td>{{ i.approved_date}}</td>
+      <td>
+        <a href="/viewapprovel/revoke/{{ i.id }}/"><button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to reject this request ?')">Revoke</button></a>
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock item %}
+

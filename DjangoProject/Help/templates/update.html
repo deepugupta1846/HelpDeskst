@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}{{ userdata.first_name }}{% endblock title %}
+{% block navbar %}
+<nav>
+    <div class="container-md navbar navbar-expand-md navbar-light bg-white">
+      <a class="navbar-brand" href="#"><strong>HelpDesk</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo"
+        aria-controls="navbarTogglerDemo" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse bg-white" id="navbarTogglerDemo">
+
+        <div class="nav navbar-nav ml-auto">
+
+          <a class="nav-item nav-link " href="/"><strong>Home</strong></a>
+          <a class="nav-item nav-link" href="#"><strong>About</strong></a>
+          <a class="nav-item nav-link" href="/userprofile/"><strong>Profile</strong></a>
+          <a class="nav-item nav-link" href="/logout/"><strong>Logout</strong></a>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+{% endblock navbar %}
+{% block midcontent %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                {% if msg %}
+                    <p class="alert alert-success" >{{ msg }}</p>
+                {% endif %}
+                    <div class="col-md-3">
+                        <strong>User Name</strong>
+                    </div>
+                    <div class="col-md-3">
+                        {{ updateform.first_name }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ updateform.mid_name }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ updateform.last_name }}
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>Gender</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{ updateform.gender }}
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>Email</strong>
+                    </div>
+                    <div class="col-md-9">
+                        {{ updateform.email }}
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>User Type</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{ updateform.user_type }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="submit" value="update" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+    </div>
+</div>
+</div>
+{% endblock midcontent %}
+{% block lastcontent %}
+{% endblock lastcontent %}

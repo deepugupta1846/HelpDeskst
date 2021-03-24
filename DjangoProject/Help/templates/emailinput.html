@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Email{% endblock title %}
+{% block midcontent %}
+<div class="row p-5 ">
+    <div class="col-md-2"></div>
+    <div class="col-md-10  shadow p-5 an">
+        <form action="" method="post" onsubmit="return validateForm();">
+                {% csrf_token %}
+            <h2 class="alert alert-info text-center mb-2">HelpDesk</h2>
+            <p id="errmsg" class="alert alert-danger"></p>
+            {% if m %}
+    <p class="alert alert-danger" >{{ m }}</p>
+    {% endif %}
+            <div class="row">
+            <div class="col-md-3">
+                <strong>Email</strong>
+            </div>
+            <div class="col-md-9">
+                <input type="email" name="em" class="form-control mb-2">
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Password</strong>
+                </div>
+                <div class="col-md-9">
+                    <input type="password" name="pass" class="form-control mb-2" id="id_password">
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>Notes:</strong>
+                    </div>
+                    <div class="col-md-8">
+                        <p>Password must be more than 8 Characters long. should cantain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special Character.</p>
+                    </div>
+                </div>
+            <div class="row">
+            <div class="col-md-3">
+                <strong> Confirm Password</strong>
+            </div>
+            <div class="col-md-9">
+                <input type="password" name="cpass" class="form-control mb-2" id="cpwd">
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="submit" class="btn btn-primary btn-block mb-2">
+        </div>
+        </form>
+    </div>
+</div>
+{% endblock midcontent %}
+{% block lastcontent %}
+{% endblock lastcontent %}

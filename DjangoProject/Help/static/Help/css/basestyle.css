@@ -1,0 +1,31 @@
+body {
+    min-height: 100vh;
+    background-color: #fafafa;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+nav {
+    position: fixed;
+    margin-top:-60px;
+    min-height: 54px;
+    width: 100vw;
+    box-shadow: 0 0 1px rgba(0,0,0.3);
+    background-color: #ffffff;
+    z-index: 1;
+}
+.container{
+margin-top:60px;
+}
+#id_gender{
+list-style-type:none;
+display:inline-flex;
+}
+#id_gender_0{
+margin-right:5px;
+}
+#id_gender_1{
+margin-left:5px;
+}
+#errmsg{
+display: None;
+}
