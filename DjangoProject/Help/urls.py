@@ -45,7 +45,6 @@ urlpatterns = [
     path('newraiseticketbyadmin/status/<int:id>/', ticketopenbyadmin),
     path('newraisedticket/', newRaisedTicket),
     path('newraisedticketadmin/', newRaisedTicketinadmin),
-    path('getallticket/', getAllTicket),
     path('repliedmsg/', show_replied_msg),
     path('status/<int:id>/', ticketclosed),
     path('admin/status/<int:id>/', ticketclosedbyadmin),
