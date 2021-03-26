@@ -1,5 +1,26 @@
 {% extends 'index.html' %}
-{% block title %}All Revoke User{% endblock title %}
+{% block title %}{{data}}-{{ut}}{% endblock title %}
+{% block jquery %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            setInterval(function(){
+                var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                     var obj = JSON.parse(this.responseText);
+                     $("#NofNewTicket").html(obj.nofTicket);
+                     $("#NewUserRequest").html(obj.nofNewRequest);
+
+                     $("#ClosedTicket").html(obj.nofClosedTicket);
+                    }
+                  };
+                  xhttp.open("GET", "/getTotalNewTicketNumber/", true);
+                  xhttp.send();
+            },1000*10);
+        });
+
+    </script>
+{% endblock jquery %}
 {% block sidenavbar %}
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
@@ -10,7 +31,7 @@
 </svg>
 
       <div class="media-body">
-          <a href="/adminprofile/" class="text-dark"><h4 class="m-0">{{ data }}</h4></a>
+        <a href="/adminprofile/" class="text-dark"><h4 class="m-0">{{ data }}</h4></a>
         <p class="font-weight-normal text-muted mb-0">{{ut}}</p>
       </div>
     </div>
@@ -33,22 +54,23 @@
     </li>
     <li class="nav-item">
       <a href="/viewnewrequest/" class="nav-link text-dark">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x-fillb text-primary" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-x-fillb text-primary" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
               </svg>
-                New Request User <span class="badge badge-danger">{{ tn }}</span>
+                New Request User <span class="badge badge-danger" id="NewUserRequest">{{ tn }}</span>
             </a>
     </li>
-      <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-check-fill text-primary" viewBox="0 0 16 16">
+
+    <li class="nav-item">
+      <a href="/viewapprovel/" class="nav-link text-dark">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-check-fill text-primary" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
   <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 </svg>
                 All Approvel User
             </a>
     </li>
-     <li class="nav-item">
+      <li class="nav-item">
       <a href="/alluser/" class="nav-link text-dark text-dark">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-lines-fill text-primary" viewBox="0 0 16 16">
   <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
@@ -56,8 +78,7 @@
                 All User
             </a>
     </li>
-
-       <li class="nav-item">
+      <li class="nav-item">
       <a href="/loginhistory" class="nav-link text-dark text-dark">
                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-open-fill text-primary" viewBox="0 0 16 16">
   <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
@@ -68,24 +89,24 @@
       <li class="nav-item">
       <a href="/newraisedticketadmin/" class="nav-link text-dark">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                New Raised Ticket <span class="badge badge-danger">{{ nt }}</span>
+                New Raised Ticket <span class="badge badge-danger" id="NofNewTicket">{{ nt }}</span>
             </a>
     </li>
       <li class="nav-item">
       <a href="/showclosedticketadmin/" class="nav-link text-dark">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                Closed Ticket <span class="badge badge-danger">{{ ct }}</span>
+                Closed Ticket <span class="badge badge-danger" id="ClosedTicket">{{ ct }}</span>
             </a>
-        </li>
+    </li>
       <li class="nav-item">
-      <a href="/repliedasmincomment/" class="nav-link text-dark">
+      <a href="#" class="nav-link text-dark">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
                 Replied On Your Comment
             </a>
     </li>
-      <li class="nav-item">
+    <li class="nav-item">
       <a href="/logout/" class="nav-link text-dark">
-               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left text-primary" viewBox="0 0 16 16">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left text-primary" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
                   <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
                 </svg>
@@ -93,49 +114,19 @@
             </a>
     </li>
   </ul>
+
+
 </div>
 <!-- End vertical navbar -->
 {% endblock sidenavbar %}
 {% block item %}
-
-  <table class="table table-striped shadow">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th >User Name</th>
-      <th>Gender</th>
-      <th>Gmail</th>
-
-      <th>User-Type</th>
-      <th>Approved_By</th>
-      <th>Approved_Date</th>
-        <th>Revoked_by</th>
-        <th>Revoked_date</th>
-        <th>Action</th>
-
-    </tr>
-    </thead>
-    <tbody>    {% for i in revoke_user %}
-    {% if i.revoked_by %}
-    <tr>
-      <td>{{ i.id }}</td>
-      <td >{{ i.first_name}} {{ i.mid_name}} {{ i.last_name }}</td>
-      <td>{{ i.gender }}</td>
-      <td>{{ i.email }}</td>
-
-      <td>{{ i.user_type}}</td>
-      <td>{{ i.approved_by}}</td>
-      <td>{{ i.approved_date}}</td>
-        <td>{{ i.revoked_by}}</td>
-        <td>{{ i.revoke_date}}</td>
-       <td><a href="/allrevokeuser/update/{{ i.id }}/"><button class="btn btn-warning btn-sm" onclick="return confirm('Are you sure want to Accept this request ?')">Accept</button></a></td>
-        <td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-    </tbody>
-  </table>
-
-
+{% for i in Rdata %}
+{% if i.tReply.user.id == Rid %}
+<strong>Q.{{i.tReply.ticket.id}} {{i.tReply.ticket.question}}</strong>
+<p><strong>{{i.tReply.user.first_name}}: </strong>-{{i.tReply.reply_msg}} <sup>{{i.tReply.reply_date}}</sup></p>
+<p><strong>{{i.userm.first_name}}: </strong> {{i.rplymsg}}<sup> {{i.rplymsgdate}}</sup></p>
+<hr/>
+{% endif %}
+{% endfor %}
 {% endblock item %}
 

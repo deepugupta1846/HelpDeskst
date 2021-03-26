@@ -57,6 +57,14 @@ urlpatterns = [
     path('developer/<int:ticket_opened_by>/', showOpenedbynamedeveloper),
     path('business/<int:ticket_opened_by>/', showOpenedbynamebusiness),
     path('adminpage/<int:approved_by>/', showApprovedby),
-    path('getTotalNewTicketNumber/', getTotalNewTicketNumber)
+    path('getTotalNewTicketNumber/', getTotalNewTicketNumber),
+    path('closedticketopen/status/<int:id>/', ticketopenbyadminafterclosed),
+    path('closedticketopenbydev/status/<int:id>/', closedTicketOpen),
+    path('showreply/<int:id>/', ShowReplyMsgBusiness),
+    path('showreplyadmin/<int:id>/', ShowReplyMsgAdmin),
+    path('repliedasmincomment/', RepliedAdminMsg),
+    path('showreplydeveloper/<int:id>/', ShowReplyMsgDeveloper),
+    path('replieddevelopercomment/', RepliedDeveloperMsg),
+    path('approved/<int:id>/', showApprovedbyinalluser)
 
 ]

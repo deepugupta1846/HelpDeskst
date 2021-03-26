@@ -65,7 +65,12 @@
                 Closed Ticket <span class="badge badge-danger" id="ClosedTicket">{{ ct }}</span>
             </a>
     </li>
-       
+<li class="nav-item">
+      <a href="/replieddevelopercomment/" class="nav-link text-dark">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                Replied On Your Comment
+            </a>
+    </li>
     <li class="nav-item">
       <a href="/logout/" class="nav-link text-dark">
                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left text-primary" viewBox="0 0 16 16">
@@ -95,7 +100,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-                                <button class="btn btn-success btn-sm" >{{i.status}}</button>
+                                <a href="/closedticketopenbydev/status/{{ i.id }}/"><button class="btn btn-success btn-sm" >{{i.status}}</button></a>
 							</div>
 						</div>
 			</div>

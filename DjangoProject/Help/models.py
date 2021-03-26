@@ -71,8 +71,16 @@ class TicketReply(models.Model):
     ticket = models.ForeignKey(TicketModel, on_delete=models.CASCADE)
     reply_msg = models.TextField()
     reply_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
-    rply_to_rply = models.TextField(null=True)
-    rply_to_rply_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
 
     def __str__(self):
         return f"{self.id}-Ticket:ID{self.ticket_id}-User:ID-{self.ticket.user.id}-User.Name-{self.ticket.user.first_name}"
+
+
+class ReplyToReply(models.Model):
+    tReply = models.ForeignKey(TicketReply, on_delete=models.CASCADE)
+    userm = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    rplymsg = models.TextField(null=True)
+    rplymsgdate = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
+
+    def __str__(self):
+        return f"{self.userm}-{self.rplymsg}-{self.rplymsgdate}"

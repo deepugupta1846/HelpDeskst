@@ -47,7 +47,7 @@ def userpage(request):
         msg = "Message sent..."
         subject = "Helpdesk Reply"
         email_to = d.ticket.user.email
-        mail_body = f"Hey! {d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} \n Your question is :-{d.ticket.question}- \n Replied by : {d.user.first_name} {d.user.mid_name} {d.user.last_name} from {d.user.user_type} \n -Ans. :- {d.reply_msg}  "
+        mail_body = f"Hello {d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} \n Your question is :-{d.ticket.question}- \n Replied by : {d.user.first_name} {d.user.mid_name} {d.user.last_name} from {d.user.user_type} \n -Ans. :- {d.reply_msg}  "
         html_message = """
         <div style="margin: 0; padding: 0; background: #91b5ec;">
                             <div style=" border-radius: 30px;
@@ -62,7 +62,7 @@ def userpage(request):
                 <div style="background-color:#f2f1ed">
                              
         """
-        q = f"<p>Hey! <b>{d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} </b></p> <h3>Q. {d.ticket.question}</h3><p>Replied by : <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b> from {d.user.user_type} </p><p>Ans. :-</p><p> {d.reply_msg} </p>"
+        q = f"<p>Hello <b>{d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} </b></p> <h3>Q. {d.ticket.question}</h3><p>Replied by : <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b> from {d.user.user_type} </p><p>Ans. :-</p><p> {d.reply_msg} </p>"
         html_message += ( q + '</div></div>')
         send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False,html_message=html_message)
     return render(request, 'userpage.html', {'ut': ut, 'data':data, 'nt':nt, 'ot':ot, 'msg':msg, 'ct':ct})
@@ -117,7 +117,7 @@ def business(request):
         msg = "Message sent..."
         subject = "Helpdesk Reply"
         email_to = d.ticket.user.email
-        mail_body = f"Hey! {d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} \n Your question is :-{d.ticket.question}- \n Replied by : {d.user.first_name} {d.user.mid_name} {d.user.last_name} from {d.user.user_type} \n -Ans. :- {d.reply_msg}  "
+        mail_body = f"Hello {d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} \n Your question is :-{d.ticket.question}- \n Replied by : {d.user.first_name} {d.user.mid_name} {d.user.last_name} from {d.user.user_type} \n -Ans. :- {d.reply_msg}  "
         send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False)
     replymsg = TicketReply.objects.all()
     return render(request, 'businesspage.html', {'data': data, 'name':name, 'ut':ut, 'ot':ot, 'msg':msg, 'replymsg':replymsg})
@@ -238,7 +238,7 @@ def adminPage(request):
         msg = "Message sent..."
         subject = "Helpdesk Reply"
         email_to = d.ticket.user.email
-        mail_body = f"Hey! {d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} \n Your question is :-{d.ticket.question}- \n Replied by : {d.user.first_name} {d.user.mid_name} {d.user.last_name} from {d.user.user_type} \n -Ans. :- {d.reply_msg}  "
+        mail_body = f"Hello {d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} \n Your question is :-{d.ticket.question}- \n Replied by : {d.user.first_name} {d.user.mid_name} {d.user.last_name} from {d.user.user_type} \n -Ans. :- {d.reply_msg}  "
         html_message = """
             <div style="margin: 0; padding: 0; background: #91b5ec;">
                                 <div style=" border-radius: 30px;
@@ -253,7 +253,7 @@ def adminPage(request):
                     <div style="background-color:#f2f1ed">
 
             """
-        q = f"<p>Hey! <b>{d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} </b></p> <h3>Q. {d.ticket.question}</h3><p>Replied by : <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b> from {d.user.user_type} </p><p>Ans. :-</p><p> {d.reply_msg} </p>"
+        q = f"<p>Hello <b>{d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name} </b></p> <h3>Q. {d.ticket.question}</h3><p>Replied by : <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b> from {d.user.user_type} </p><p>Ans. :-</p><p> {d.reply_msg} </p>"
         html_message += (q + '</div></div>')
         send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False,
                   html_message=html_message)
@@ -361,7 +361,7 @@ def reject(request, id):
     d.delete()
     subject = "Tech Assist"
     email_to = d.email
-    mail_body = f"Hey! {d.first_name} {d.mid_name} {d.last_name} \n Congrats! you are approved by Admin {request.session.get('id')}-{request.session.get('name')} \n Your ID no.: {d.id}\nUser Type.: {d.user_type}\napproved_date: {d.approved_date}\n☺"
+    mail_body = f"Hello {d.first_name} {d.mid_name} {d.last_name} \n Congrats! you are approved by Admin {request.session.get('id')}-{request.session.get('name')} \n Your ID no.: {d.id}\nUser Type.: {d.user_type}\napproved_date: {d.approved_date}\n☺"
     html_message = """
                         <div style="margin: 0; padding: 0; background: #91b5ec;">
                                             <div style=" border-radius: 30px;
@@ -376,7 +376,7 @@ def reject(request, id):
                                 <div style="background-color:#f2f1ed; padding:10px;">
 
                         """
-    q = f"Hey! <b>{d.first_name} {d.mid_name} {d.last_name}</b><p> your request  has been rejected by Admin <b>{request.session.get('id')}-{request.session.get('name')} </b></p><br/><p> Your ID no. - <b>{d.id}</b></p><p> Gmail ID. - <b>{d.email}</b></p><p>Password - <b>{d.password}</b></p><p>User Type - <b>{d.user_type}</b><p>Approved_date: <b>{d.approved_date}</b></p><br/><p>Thanks</p>"
+    q = f"Hello <b>{d.first_name} {d.mid_name} {d.last_name}</b><p> your request  has been rejected by Admin <b>{request.session.get('id')}-{request.session.get('name')} </b></p><br/><p> Your ID no. - <b>{d.id}</b></p><p> Gmail ID. - <b>{d.email}</b></p><p>Password - <b>{d.password}</b></p><p>User Type - <b>{d.user_type}</b><p>Approved_date: <b>{d.approved_date}</b></p><br/><p>Thanks</p>"
     html_message += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
     return redirect('/viewnewrequest/')
@@ -393,7 +393,7 @@ def accept(request, id):
     d.save()
     subject = "Tech Assist"
     email_to = d.email
-    mail_body = f"Hey! {d.first_name} {d.mid_name} {d.last_name} \n Congrats! you are approved by Admin {request.session.get('id')}-{request.session.get('name')} \n Your ID no.: {d.id}\nUser Type.: {d.user_type}\napproved_date: {d.approved_date}\n☺"
+    mail_body = f"Hello {d.first_name} {d.mid_name} {d.last_name} \n Congrats! you are approved by Admin {request.session.get('id')}-{request.session.get('name')} \n Your ID no.: {d.id}\nUser Type.: {d.user_type}\napproved_date: {d.approved_date}\n☺"
     html_message = """
                     <div style="margin: 0; padding: 0; background: #91b5ec;">
                                         <div style=" border-radius: 30px;
@@ -408,7 +408,7 @@ def accept(request, id):
                             <div style="background-color:#f2f1ed; padding:10px;">
 
                     """
-    q = f"Hey! <b>{d.first_name} {d.mid_name} {d.last_name}</b><p> Congrats! you are approved by Admin <b>{request.session.get('id')}-{request.session.get('name')} </b></p><br/><p> Your ID no. - <b>{d.id}</b></p><p> Gmail ID. - <b>{d.email}</b></p><p>Password - <b>{d.password}</b></p><p>User Type - <b>{d.user_type}</b><p>Approved_date: <b>{d.approved_date}</b></p><br/><p>Thanks</p>"
+    q = f"Hello <b>{d.first_name} {d.mid_name} {d.last_name}</b><p> Congrats! you are approved by Admin <b>{request.session.get('id')}-{request.session.get('name')} </b></p><br/><p> Your ID no. - <b>{d.id}</b></p><p> Gmail ID. - <b>{d.email}</b></p><p>Password - <b>{d.password}</b></p><p>User Type - <b>{d.user_type}</b><p>Approved_date: <b>{d.approved_date}</b></p><br/><p>Thanks</p>"
     html_message += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
     return redirect('/viewnewrequest/')
@@ -539,7 +539,7 @@ def newticketRaise(request):
                                 <div style="background-color:#f2f1ed; padding:10px;">
 
                         """
-        q = f"<p>Hey! <b>{form.user.first_name} {form.user.mid_name} {form.user.last_name} </b></p><p>Your ticket raised successfully </p><p><h3>Q.{form.id} {form.question}</h3></p><p>Description - <b>{form.description}</b><p>Ticket Category - <b>{form.categrories}</b></p><p>Ticket Type - <b>{form.ticket_type}</b></p><p>Raised Date - <b>{form.ticket_raise_date}</b>"
+        q = f"<p>Hello <b>{form.user.first_name} {form.user.mid_name} {form.user.last_name} </b></p><p>Your ticket raised successfully </p><p><h3>Q.{form.id} {form.question}</h3></p><p>Description - <b>{form.description}</b><p>Ticket Category - <b>{form.categrories}</b></p><p>Ticket Type - <b>{form.ticket_type}</b></p><p>Raised Date - <b>{form.ticket_raise_date}</b>"
         html_message += (q + '</div></div>')
         send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
 
@@ -682,7 +682,7 @@ def ticketopen(request, id):
 
                 <div style="background-color:#f2f1ed; padding:10px;">
         """
-    q = f"<p>Hey! <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Opened </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Opened by - <b>{d.ticket_opened_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Opened Date - <b>{d.ticket_open_date}</b>"
+    q = f"<p>Hello <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Opened </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Opened by - <b>{d.ticket_opened_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Opened Date - <b>{d.ticket_open_date}</b>"
     html_message += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
     email2 = f.email
@@ -699,10 +699,57 @@ def ticketopen(request, id):
 
                     <div style="background-color:#f2f1ed; padding:10px;">
             """
-    q = f"<p>Hey! <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You opened a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Opened Date - <b>{d.ticket_open_date}</b></p>"
+    q = f"<p>Hello <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You opened a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Opened Date - <b>{d.ticket_open_date}</b></p>"
     html_message2 += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email2], fail_silently=False, html_message=html_message2)
     return redirect('/newraisedticket/')
+
+def closedTicketOpen(request, id):
+    if request.session.get('name', 'None') == 'None':
+        return redirect('/login/')
+    d = TicketModel.objects.get(id=id)
+    d.status = "Open"
+    d.ticket_opened_by = request.session.get('id')
+    d.ticket_open_date = date.today()
+    d.save()
+    f = UserModel.objects.get(id=d.ticket_opened_by)
+    subject = "Tech Assist Ticket Status"
+    mail_body = ""
+    email_to = d.user.email
+    html_message = """
+        <div style="margin: 0; padding: 0; background: #91b5ec;">
+                            <div style=" border-radius: 30px;
+                        box-shadow: 3px 3px 3px #b1b1b1,
+                                -3px -3px 3px #555;">
+                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
+                    <ul style="text-align: center;">
+                        <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
+                    </ul>
+                </div>
+
+                <div style="background-color:#f2f1ed; padding:10px;">
+        """
+    q = f"<p>Hello <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Opened </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Opened by - <b>{d.ticket_opened_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Opened Date - <b>{d.ticket_open_date}</b>"
+    html_message += (q + '</div></div>')
+    send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
+    email2 = f.email
+    html_message2 = """
+            <div style="margin: 0; padding: 0; background: #91b5ec;">
+                                <div style=" border-radius: 30px;
+                            box-shadow: 3px 3px 3px #b1b1b1,
+                                    -3px -3px 3px #555;">
+                        <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
+                        <ul style="text-align: center;">
+                            <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
+                        </ul>
+                    </div>
+
+                    <div style="background-color:#f2f1ed; padding:10px;">
+            """
+    q = f"<p>Hello <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You opened a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Opened Date - <b>{d.ticket_open_date}</b></p>"
+    html_message2 += (q + '</div></div>')
+    send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email2], fail_silently=False, html_message=html_message2)
+    return redirect('/showclosedticket/')
 
 
 def ticketopenbyadmin(request, id):
@@ -730,7 +777,7 @@ def ticketopenbyadmin(request, id):
 
                 <div style="background-color:#f2f1ed; padding:10px;">
         """
-    q = f"<p>Hey! <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Opened </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Opened by - <b>{d.ticket_opened_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Opened Date - <b>{d.ticket_open_date}</b>"
+    q = f"<p>Hello <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Opened </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Opened by - <b>{d.ticket_opened_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Opened Date - <b>{d.ticket_open_date}</b>"
     html_message += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
     email2 = f.email
@@ -747,10 +794,58 @@ def ticketopenbyadmin(request, id):
 
                     <div style="background-color:#f2f1ed; padding:10px;">
             """
-    q = f"<p>Hey! <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You opened a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Opened Date - <b>{d.ticket_open_date}</b></p>"
+    q = f"<p>Hello <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You opened a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Opened Date - <b>{d.ticket_open_date}</b></p>"
     html_message2 += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email2], fail_silently=False, html_message=html_message2)
     return redirect('/newraisedticketadmin/')
+
+
+def ticketopenbyadminafterclosed(request, id):
+    if request.session.get('name', 'None') == 'None':
+        return redirect('/login/')
+    d = TicketModel.objects.get(id=id)
+    d.status = "Open"
+    d.ticket_opened_by = request.session.get('id')
+    d.ticket_open_date = date.today()
+    d.save()
+    f = UserModel.objects.get(id=d.ticket_opened_by)
+    subject = "Tech Assist Ticket Status"
+    mail_body = ""
+    email_to = d.user.email
+    html_message = """
+        <div style="margin: 0; padding: 0; background: #91b5ec;">
+                            <div style=" border-radius: 30px;
+                        box-shadow: 3px 3px 3px #b1b1b1,
+                                -3px -3px 3px #555;">
+                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
+                    <ul style="text-align: center;">
+                        <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
+                    </ul>
+                </div>
+
+                <div style="background-color:#f2f1ed; padding:10px;">
+        """
+    q = f"<p>Hello <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Opened </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Opened by - <b>{d.ticket_opened_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Opened Date - <b>{d.ticket_open_date}</b>"
+    html_message += (q + '</div></div>')
+    send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
+    email2 = f.email
+    html_message2 = """
+            <div style="margin: 0; padding: 0; background: #91b5ec;">
+                                <div style=" border-radius: 30px;
+                            box-shadow: 3px 3px 3px #b1b1b1,
+                                    -3px -3px 3px #555;">
+                        <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
+                        <ul style="text-align: center;">
+                            <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
+                        </ul>
+                    </div>
+
+                    <div style="background-color:#f2f1ed; padding:10px;">
+            """
+    q = f"<p>Hello <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You opened a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Opened Date - <b>{d.ticket_open_date}</b></p>"
+    html_message2 += (q + '</div></div>')
+    send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email2], fail_silently=False, html_message=html_message2)
+    return redirect('/showclosedticketadmin/')
 
 
 def ticketclosed(request, id):
@@ -780,7 +875,7 @@ def ticketclosed(request, id):
 
                     <div style="background-color:#f2f1ed; padding:10px;">
             """
-    q = f"<p>Hey! <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Closed </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Closed by - <b>{d.ticket_closed_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Closed Date - <b>{d.ticket_close_date}</b>"
+    q = f"<p>Hello <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Closed </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Closed by - <b>{d.ticket_closed_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Closed Date - <b>{d.ticket_close_date}</b>"
     html_message += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
     email2 = f.email
@@ -797,7 +892,7 @@ def ticketclosed(request, id):
 
                         <div style="background-color:#f2f1ed; padding:10px;">
                 """
-    q = f"<p>Hey! <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You closed a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Closed Date - <b>{d.ticket_close_date}</b></p>"
+    q = f"<p>Hello <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You closed a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Closed Date - <b>{d.ticket_close_date}</b></p>"
     html_message2 += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email2], fail_silently=False, html_message=html_message2)
     return redirect('/devloper/')
@@ -830,7 +925,7 @@ def ticketclosedbyadmin(request, id):
 
                     <div style="background-color:#f2f1ed; padding:10px;">
             """
-    q = f"<p>Hey! <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Closed </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Closed by - <b>{d.ticket_closed_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Closed Date - <b>{d.ticket_close_date}</b>"
+    q = f"<p>Hello <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your ticket Closed </p><p><h3>Q.{d.id} {d.question}</h3></p><p>Closed by - <b>{d.ticket_closed_by} {f.first_name} {f.mid_name} {f.last_name} </b><p>Closed Date - <b>{d.ticket_close_date}</b>"
     html_message += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
     email2 = f.email
@@ -847,7 +942,7 @@ def ticketclosedbyadmin(request, id):
 
                         <div style="background-color:#f2f1ed; padding:10px;">
                 """
-    q = f"<p>Hey! <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You closed a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Closed Date - <b>{d.ticket_close_date}</b></p>"
+    q = f"<p>Hello <b>{f.first_name} {f.mid_name} {f.last_name} </b></p><p>You closed a ticket </p><p><h3>Q.{d.id} {d.question}</h3><p>Raised by - <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name}</b></p><p>Raised Date - <b>{d.ticket_raise_date}</b></p><p>Closed Date - <b>{d.ticket_close_date}</b></p>"
     html_message2 += (q + '</div></div>')
     send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email2], fail_silently=False, html_message=html_message2)
     return redirect('/adminpage/')
@@ -865,14 +960,15 @@ def show_replied_msg(request):
     u = request.session.get('id')
     replymsg = TicketReply.objects.all()
     if request.method == 'POST':
-        reply_id = request.POST['reply_id']
-        d = TicketReply.objects.get(id=reply_id)
-        d.rply_to_rply = request.POST['rtor']
-        d.rply_to_rply_date = datetime.today()
+        d = ReplyToReply()
+        d.tReply_id = request.POST['reply_id']
+        d.userm_id = request.session['id']
+        d.rplymsg = request.POST['rtor']
+        d.rplymsgdate = datetime.today()
         d.save()
         msg = "Reply sent...."
         subject = "Tech Assist"
-        email_to = d.user.email
+        email_to = d.tReply.user.email
         mail_body = "Hello"
         html_message = """
                 <div style="margin: 0; padding: 0; background: #91b5ec;">
@@ -888,7 +984,7 @@ def show_replied_msg(request):
                         <div style="background-color:#f2f1ed; padding:10px;">
 
                 """
-        q = f"<p>Hey! <b>{d.user.first_name} {d.user.mid_name} {d.user.last_name} </b></p><p>Your message : {d.reply_msg} </p><p>Comment on<h3>Q.{d.ticket.id} {d.ticket.question}</h3></p><br/><br/><p>Replied by: <b>{d.ticket.user.first_name} {d.ticket.user.mid_name} {d.ticket.user.last_name}</b> from <b>{d.ticket.user.user_type}</b></p><p>Replied Message : {d.rply_to_rply}</p>"
+        q = f"<p>Hello <b>{d.tReply.user.first_name} {d.tReply.user.mid_name} {d.tReply.user.last_name} </b></p><p>Your message : {d.tReply.reply_msg} </p><p>Comment on<h3>Q.{d.tReply.ticket.id} {d.tReply.ticket.question}</h3></p><br/><br/><p>Replied by: <b>{d.userm.first_name} {d.userm.mid_name} {d.userm.last_name}</b> from <b>{d.userm.user_type}</b></p><p>Replied Message : {d.rplymsg}</p>"
         html_message += (q + '</div></div>')
         send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False, html_message=html_message)
     return render(request, 'repliedmsg.html', {'data': data, 'name': name, 'ut': ut, 'replymsg': replymsg, 'uid':u, 'msg':msg})
@@ -926,6 +1022,7 @@ def showOpenedbynamebusiness(request, ticket_opened_by):
     ut = request.session.get('user_type')
     return render(request, 'business_ticket_openby_profile.html', {'userdata':f, 'data':data,'ut':ut})
 
+
 def showApprovedby(request, approved_by):
     if request.session.get('name', 'None') == 'None':
         return redirect('/login/')
@@ -936,8 +1033,15 @@ def showApprovedby(request, approved_by):
     ut = request.session.get('user_type')
     return render(request, 'admin_ticket_openedby_profile.html', {'userdata':f, 'data':data,'ut':ut})
 
-
-
+def showApprovedbyinalluser(request, id):
+    if request.session.get('name', 'None') == 'None':
+        return redirect('/login/')
+    if request.session['user_type'] != 'Admin':
+        return redirect('/logout/')
+    f = UserModel.objects.get(id=id)
+    data = request.session.get('name')
+    ut = request.session.get('user_type')
+    return render(request, 'show_Approved_by_inalluser.html', {'userdata':f, 'data':data,'ut':ut})
 
 
 def getTotalNewTicketNumber(request):
@@ -951,6 +1055,130 @@ def getTotalNewTicketNumber(request):
     return JsonResponse(data)
 
 
+def ShowReplyMsgBusiness(request, id):
+    if request.session.get('name', 'None') == 'None':
+        return redirect('/login/')
+    if request.session['user_type'] != 'Business team':
+        return redirect('/logout/')
+    Reply_data = TicketReply.objects.filter(ticket_id=id)
+    data = request.session.get('name')
+    ut = request.session.get('user_type')
+    rid = request.session.get('id')
+    msg = ""
+    if request.method == 'POST':
+        d = ReplyToReply()
+        d.tReply_id = request.POST['reply_id']
+        d.userm_id = request.session['id']
+        d.rplymsg = request.POST['rtor']
+        d.rplymsgdate = datetime.today()
+        d.save()
+    return render(request, 'Business_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg})
+
+
+def ShowReplyMsgAdmin(request, id):
+    if request.session.get('name', 'None') == 'None':
+        return redirect('/login/')
+    if request.session['user_type'] != 'Admin':
+        return redirect('/logout/')
+    rid = request.session.get('id')
+    Reply_data = TicketReply.objects.filter(ticket_id=id)
+    data = request.session.get('name')
+    ut = request.session.get('user_type')
+    msg = ""
+    if request.method == 'POST':
+        d = ReplyToReply()
+        d.tReply_id = request.POST['reply_id']
+        d.userm_id = request.session['id']
+        d.rplymsg = request.POST['rtor']
+        d.rplymsgdate = datetime.today()
+        d.save()
+        msg = "Reply sent...."
+        subject = "Tech Assist"
+        email_to = d.tReply.user.email
+        mail_body = "Hello"
+        html_message = """
+                        <div style="margin: 0; padding: 0; background: #91b5ec;">
+                                            <div style=" border-radius: 30px;
+                                        box-shadow: 3px 3px 3px #b1b1b1,
+                                                -3px -3px 3px #555;">
+                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
+                                    <ul style="text-align: center;">
+                                        <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
+                                    </ul>
+                                </div>
+
+                                <div style="background-color:#f2f1ed; padding:10px;">
+
+                        """
+        q = f"<p>Hello <b>{d.tReply.user.first_name} {d.tReply.user.mid_name} {d.tReply.user.last_name} </b></p><p>Your message : {d.tReply.reply_msg} </p><p>Comment on<h3>Q.{d.tReply.ticket.id} {d.tReply.ticket.question}</h3></p><br/><br/><p>Replied by: <b>{d.userm.first_name} {d.userm.mid_name} {d.userm.last_name}</b> from <b>{d.userm.user_type}</b></p><p>Replied Message : {d.rplymsg}</p>"
+        html_message += (q + '</div></div>')
+        send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False,
+                  html_message=html_message)
+    return render(request, 'Admin_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg, 'rid':rid})
+
+
+def ShowReplyMsgDeveloper(request, id):
+    if request.session.get('name', 'None') == 'None':
+        return redirect('/login/')
+    if request.session['user_type'] != 'Developer':
+        return redirect('/logout/')
+    Reply_data = TicketReply.objects.filter(ticket_id=id)
+    data = request.session.get('name')
+    ut = request.session.get('user_type')
+    msg = ""
+    if request.method == 'POST':
+        d = ReplyToReply()
+        d.tReply_id = request.POST['reply_id']
+        d.userm_id = request.session['id']
+        d.rplymsg = request.POST['rtor']
+        d.rplymsgdate = datetime.today()
+        d.save()
+        msg = "Reply sent...."
+        subject = "Tech Assist"
+        email_to = d.tReply.user.email
+        mail_body = "Hello"
+        html_message = """
+                        <div style="margin: 0; padding: 0; background: #91b5ec;">
+                                            <div style=" border-radius: 30px;
+                                        box-shadow: 3px 3px 3px #b1b1b1,
+                                                -3px -3px 3px #555;">
+                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
+                                    <ul style="text-align: center;">
+                                        <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
+                                    </ul>
+                                </div>
+
+                                <div style="background-color:#f2f1ed; padding:10px;">
+
+                        """
+        q = f"<p>Hello <b>{d.tReply.user.first_name} {d.tReply.user.mid_name} {d.tReply.user.last_name} </b></p><p>Your message : {d.tReply.reply_msg} </p><p>Comment on<h3>Q.{d.tReply.ticket.id} {d.tReply.ticket.question}</h3></p><br/><br/><p>Replied by: <b>{d.userm.first_name} {d.userm.mid_name} {d.userm.last_name}</b> from <b>{d.userm.user_type}</b></p><p>Replied Message : {d.rplymsg}</p>"
+        html_message += (q + '</div></div>')
+        send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False,
+                  html_message=html_message)
+    return render(request, 'Developer_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg})
+
+
+def RepliedAdminMsg(request):
+    if request.session.get('name', 'None') == 'None':
+        return redirect('/login/')
+    if request.session['user_type'] != 'Admin':
+        return redirect('/logout/')
+    Rdata = ReplyToReply.objects.all()
+    data = request.session.get('name')
+    ut = request.session.get('user_type')
+    Rid = request.session.get('id')
+    return render(request, 'Replied_Admin_Comment.html', {'Rdata':Rdata, 'Rid':Rid, 'data':data,'ut':ut})
+
+def RepliedDeveloperMsg(request):
+    if request.session.get('name', 'None') == 'None':
+        return redirect('/login/')
+    if request.session['user_type'] != 'Developer':
+        return redirect('/logout/')
+    Rdata = ReplyToReply.objects.all()
+    data = request.session.get('name')
+    ut = request.session.get('user_type')
+    Rid = request.session.get('id')
+    return render(request, 'Reply_Developer_Comment.html', {'Rdata':Rdata, 'Rid':Rid, 'data':data,'ut':ut})
 
 
 
