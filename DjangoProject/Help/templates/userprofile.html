@@ -1,5 +1,5 @@
 {% extends 'index.html' %}
-{% block title %}{{ userdata.first_name }}{% endblock title %}
+{% block title %}{{data}}-{{ut}}{% endblock title %}
 {% block sidenavbar %}
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
@@ -10,8 +10,8 @@
 </svg>
 
       <div class="media-body">
-          <a href="/userprofile/" class=" text-dark"><h4 class="m-0">{{ userdata.first_name }}</h4></a>
-        <p class="font-weight-normal text-muted mb-0">{{ userdata.user_type }}</p>
+        <a href="/userprofile/" class="text-dark"><h4 class="m-0">{{ data }}</h4></a>
+        <p class="font-weight-normal text-muted mb-0">{{ut}}</p>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
                 about
             </a>
     </li>
-    <li class="nav-item">
+      <li class="nav-item">
       <a href="/newraisedticket/" class="nav-link text-dark">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
                 New Raised Ticket <span class="badge badge-danger">{{ nt }}</span>
@@ -52,6 +52,7 @@
                 Log Out
             </a>
     </li>
+
   </ul>
 
 

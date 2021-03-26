@@ -1,5 +1,26 @@
 {% extends 'index.html' %}
 {% block title %}{{data}}-{{ut}}{% endblock title %}
+{% block jquery %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            setInterval(function(){
+                var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                     var obj = JSON.parse(this.responseText);
+                     $("#NofNewTicket").html(obj.nofTicket);
+                     $("#NewUserRequest").html(obj.nofNewRequest);
+
+                     $("#ClosedTicket").html(obj.nofClosedTicket);
+                    }
+                  };
+                  xhttp.open("GET", "/getTotalNewTicketNumber/", true);
+                  xhttp.send();
+            },1000*10);
+        });
+
+    </script>
+{% endblock jquery %}
 {% block sidenavbar %}
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
@@ -34,15 +55,16 @@
       <li class="nav-item">
       <a href="/newraisedticket/" class="nav-link text-dark">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                New Raised Ticket <span class="badge badge-danger">{{ nt }}</span>
+                New Raised Ticket <span class="badge badge-danger" id="NofNewTicket">{{ nt }}</span>
             </a>
     </li>
       <li class="nav-item">
       <a href="/showclosedticket/" class="nav-link text-dark">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                Closed Ticket <span class="badge badge-danger">{{ ct }}</span>
+                Closed Ticket <span class="badge badge-danger" id="ClosedTicket">{{ ct }}</span>
             </a>
     </li>
+
     <li class="nav-item">
       <a href="/logout/" class="nav-link text-dark">
                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left text-primary" viewBox="0 0 16 16">

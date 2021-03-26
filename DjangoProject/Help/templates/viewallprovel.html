@@ -1,5 +1,26 @@
 {% extends 'index.html' %}
 {% block title %}All Approvel{% endblock title %}
+{% block jquery %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            setInterval(function(){
+                var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                     var obj = JSON.parse(this.responseText);
+                     $("#NofNewTicket").html(obj.nofTicket);
+                     $("#NewUserRequest").html(obj.nofNewRequest);
+
+                     $("#ClosedTicket").html(obj.nofClosedTicket);
+                    }
+                  };
+                  xhttp.open("GET", "/getTotalNewTicketNumber/", true);
+                  xhttp.send();
+            },1000*10);
+        });
+
+    </script>
+{% endblock jquery %}
 {% block sidenavbar %}
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
@@ -36,7 +57,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-x-fillb text-primary" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
               </svg>
-                New Request User <span class="badge badge-danger">{{ tn }}</span>
+                New Request User <span class="badge badge-danger" id="NewUserRequest">{{ tn }}</span>
             </a>
     </li>
     <li class="nav-item">
@@ -67,13 +88,13 @@
       <li class="nav-item">
       <a href="/newraisedticketadmin/" class="nav-link text-dark">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                New Raised Ticket <span class="badge badge-danger">{{ nt }}</span>
+                New Raised Ticket <span class="badge badge-danger" id="NofNewTicket">{{ nt }}</span>
             </a>
     </li>
       <li class="nav-item">
       <a href="/showclosedticketadmin/" class="nav-link text-dark">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                Closed Ticket <span class="badge badge-danger">{{ ct }}</span>
+                Closed Ticket <span class="badge badge-danger" id="ClosedTicket">{{ ct }}</span>
             </a>
         </li>
       <li class="nav-item">

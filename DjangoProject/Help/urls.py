@@ -23,7 +23,7 @@ urlpatterns = [
     path('signup/', signup),
     path('devloper/', userpage),
     path('logout/', logout),
-    path('userprofile/', profile),
+    path('userprofile/', developerprofile),
     path('businessprofile/', businessprofile),
     path('adminpage/', adminPage),
     path('adminprofile/', adminprofile),
@@ -56,6 +56,7 @@ urlpatterns = [
     path('adminpage/<int:ticket_opened_by>/', showOpenedbyname),
     path('developer/<int:ticket_opened_by>/', showOpenedbynamedeveloper),
     path('business/<int:ticket_opened_by>/', showOpenedbynamebusiness),
-    path('adminpage/<int:approved_by>/', showApprovedby)
+    path('adminpage/<int:approved_by>/', showApprovedby),
+    path('getTotalNewTicketNumber/', getTotalNewTicketNumber)
 
 ]

@@ -1,9 +1,4 @@
-body {
-    min-height: 100vh;
-    background-color: #fafafa;
-    font-family: 'Ubuntu', sans-serif;
 
-}
 nav {
     position: fixed;
     margin-top:-60px;

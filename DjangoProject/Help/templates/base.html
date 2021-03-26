@@ -11,7 +11,35 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'Help/css/basestyle.css' %}">
+    <style>
+        body {
+    min-height: 100vh;
+    background-color: #fafafa;
+    font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
+}
+h1{
+margin:50px;
+animation: skew 3s infinite;
+  transform: skew(20deg);
+  animation-direction: alternate;
+  opacity: .7;
+}
+
+@keyframes skew {
+  0% {
+    transform: skewX(20deg);
+
+  }
+  100% {
+    transform: skewX(-20deg);
+  }
+}
+
+
+    </style>
     <script type="text/javascript">
+
         function validateForm()
     {
         var pwd =document.getElementById("id_password");
@@ -37,6 +65,7 @@
             }
         return true;
     }
+
     function clicked() {
        if (confirm('Do you want to submit?')) {
            yourformelement.submit();
@@ -50,7 +79,7 @@
 {% block navbar %}
 <nav>
     <div class="container-md navbar navbar-expand-md navbar-light bg-white">
-      <a class="navbar-brand" href="#"><strong>HelpDesk</strong></a>
+      <a class="navbar-brand" href="#"><img class="navbar-brand logo" src="{% static 'Help/image/logo_dark_img.png' %}" width="120px"/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo"
         aria-controls="navbarTogglerDemo" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -72,7 +101,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-        {% block midcontent %} {% endblock midcontent %}
+        {% block midcontent %}
+            <h1><strong class="text text-muted home">WelCome To Tech Assist</strong></h1>
+            {% endblock midcontent %}
         </div>
         {% block lastcontent %}
         <div class="col-md-3 p-3 shadow pn">
@@ -84,11 +115,11 @@
                 {% csrf_token %}
               <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="" placeholder="Enter email" name="emailid">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="emailid">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" value=" " placeholder="Password" name="paasword">
+                <input type="password" class="form-control" id="exampleInputPassword1"  placeholder="Password" name="paasword">
               </div>
               <input type="submit" value="submit" class="btn btn-primary">
                 </form>

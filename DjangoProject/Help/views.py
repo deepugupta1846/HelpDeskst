@@ -53,7 +53,7 @@ def userpage(request):
                             <div style=" border-radius: 30px;
                         box-shadow: 3px 3px 3px #b1b1b1,
                                 -3px -3px 3px #555;">
-                    <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                     <ul style="text-align: center;">
                         <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                     </ul>
@@ -135,7 +135,23 @@ def emailinput(request):
         rand = random.randint(100000, 999999)
         message = f"your otp is {rand}"
         subject = "HelpDesk Email Verification"
-        send_mail(subject, message, 'helpdeskricla@gmail.com', [email_id], fail_silently=False)
+        html_message = """
+                                <div style="margin: 0; padding: 0; background: #91b5ec;">
+                                                    <div style=" border-radius: 30px;
+                                                box-shadow: 3px 3px 3px #b1b1b1,
+                                                        -3px -3px 3px #555;">
+                                            <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
+                                            <ul style="text-align: center;">
+                                                <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
+                                            </ul>
+                                        </div>
+
+                                        <div style="background-color:#f2f1ed; padding:10px;">
+
+                                """
+        q = f"<h2>Welcome To Tech Assist </h2><p>your otp is {rand}</p>"
+        html_message += (q + '</div></div>')
+        send_mail(subject, message, 'helpdeskricla@gmail.com', [email_id], fail_silently=False, html_message=html_message)
         request.session['email_id'] = email_id
         request.session['password'] = password
         request.session['otp_msg'] = rand
@@ -180,7 +196,7 @@ def signup(request):
                                             <div style=" border-radius: 30px;
                                         box-shadow: 3px 3px 3px #b1b1b1,
                                                 -3px -3px 3px #555;">
-                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                                     <ul style="text-align: center;">
                                         <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                                     </ul>
@@ -228,7 +244,7 @@ def adminPage(request):
                                 <div style=" border-radius: 30px;
                             box-shadow: 3px 3px 3px #b1b1b1,
                                     -3px -3px 3px #555;">
-                        <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                        <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                         <ul style="text-align: center;">
                             <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                         </ul>
@@ -351,7 +367,7 @@ def reject(request, id):
                                             <div style=" border-radius: 30px;
                                         box-shadow: 3px 3px 3px #b1b1b1,
                                                 -3px -3px 3px #555;">
-                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                                     <ul style="text-align: center;">
                                         <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                                     </ul>
@@ -383,7 +399,7 @@ def accept(request, id):
                                         <div style=" border-radius: 30px;
                                     box-shadow: 3px 3px 3px #b1b1b1,
                                             -3px -3px 3px #555;">
-                                <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                                <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                                 <ul style="text-align: center;">
                                     <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                                 </ul>
@@ -441,13 +457,15 @@ def logout(request):
     return redirect('/login/')
 
 
-def profile(request):
+def developerprofile(request):
     if request.session.get('name', 'None') == 'None':
         return redirect('/login/')
     if request.session['user_type'] != 'Developer':
         return redirect('/logout/')
-    userdata = UserModel.objects.get(first_name=request.session['name'])
-    return render(request, 'userprofile.html', {'userdata': userdata})
+    name = request.session.get('name')
+    ut = request.session['user_type']
+    userdata = UserModel.objects.get(id=request.session['id'])
+    return render(request, 'userprofile.html', {'userdata': userdata, 'data': name, 'ut':ut})
 
 
 def businessprofile(request):
@@ -457,7 +475,7 @@ def businessprofile(request):
         return redirect('/logout/')
     name = request.session.get('name')
     ut = request.session['user_type']
-    userdata = UserModel.objects.get(first_name=request.session['name'])
+    userdata = UserModel.objects.get(id=request.session['id'])
     return render(request, 'businessprofile.html', {'userdata': userdata, 'data': name, 'ut':ut})
 
 
@@ -466,7 +484,7 @@ def adminprofile(request):
         return redirect('/login/')
     if request.session['user_type'] != 'Admin':
         return redirect('/logout/')
-    userdata = UserModel.objects.get(first_name=request.session['name'])
+    userdata = UserModel.objects.get(id=request.session['id'])
     new_request = UserModel.objects.filter(approved_by=None)
     tn = len(new_request)
     new_Raised_Ticket = TicketModel.objects.filter(status="New")
@@ -512,7 +530,7 @@ def newticketRaise(request):
                                             <div style=" border-radius: 30px;
                                         box-shadow: 3px 3px 3px #b1b1b1,
                                                 -3px -3px 3px #555;">
-                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                                     <ul style="text-align: center;">
                                         <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                                     </ul>
@@ -539,7 +557,7 @@ def newticketRaise(request):
                                                             <div style=" border-radius: 30px;
                                                         box-shadow: 3px 3px 3px #b1b1b1,
                                                                 -3px -3px 3px #555;">
-                                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                                                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                                                     <ul style="text-align: center;">
                                                         <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                                                     </ul>
@@ -656,7 +674,7 @@ def ticketopen(request, id):
                             <div style=" border-radius: 30px;
                         box-shadow: 3px 3px 3px #b1b1b1,
                                 -3px -3px 3px #555;">
-                    <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                     <ul style="text-align: center;">
                         <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                     </ul>
@@ -673,7 +691,7 @@ def ticketopen(request, id):
                                 <div style=" border-radius: 30px;
                             box-shadow: 3px 3px 3px #b1b1b1,
                                     -3px -3px 3px #555;">
-                        <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                        <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                         <ul style="text-align: center;">
                             <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                         </ul>
@@ -704,7 +722,7 @@ def ticketopenbyadmin(request, id):
                             <div style=" border-radius: 30px;
                         box-shadow: 3px 3px 3px #b1b1b1,
                                 -3px -3px 3px #555;">
-                    <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                    <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                     <ul style="text-align: center;">
                         <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                     </ul>
@@ -721,7 +739,7 @@ def ticketopenbyadmin(request, id):
                                 <div style=" border-radius: 30px;
                             box-shadow: 3px 3px 3px #b1b1b1,
                                     -3px -3px 3px #555;">
-                        <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                        <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                         <ul style="text-align: center;">
                             <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                         </ul>
@@ -754,7 +772,7 @@ def ticketclosed(request, id):
                                 <div style=" border-radius: 30px;
                             box-shadow: 3px 3px 3px #b1b1b1,
                                     -3px -3px 3px #555;">
-                        <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                        <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                         <ul style="text-align: center;">
                             <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                         </ul>
@@ -771,7 +789,7 @@ def ticketclosed(request, id):
                                     <div style=" border-radius: 30px;
                                 box-shadow: 3px 3px 3px #b1b1b1,
                                         -3px -3px 3px #555;">
-                            <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                            <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                             <ul style="text-align: center;">
                                 <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                             </ul>
@@ -804,7 +822,7 @@ def ticketclosedbyadmin(request, id):
                                 <div style=" border-radius: 30px;
                             box-shadow: 3px 3px 3px #b1b1b1,
                                     -3px -3px 3px #555;">
-                        <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                        <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                         <ul style="text-align: center;">
                             <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                         </ul>
@@ -821,7 +839,7 @@ def ticketclosedbyadmin(request, id):
                                     <div style=" border-radius: 30px;
                                 box-shadow: 3px 3px 3px #b1b1b1,
                                         -3px -3px 3px #555;">
-                            <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                            <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                             <ul style="text-align: center;">
                                 <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                             </ul>
@@ -861,7 +879,7 @@ def show_replied_msg(request):
                                     <div style=" border-radius: 30px;
                                 box-shadow: 3px 3px 3px #b1b1b1,
                                         -3px -3px 3px #555;">
-                            <img style="float: left;padding: 10px;" Tech Asisst src="https://github.com/deepugupta1846/mywebpage/blob/main/logo_dark_img.png?raw=true" width="150px">
+                            <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
                             <ul style="text-align: center;">
                                 <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
                             </ul>
@@ -922,6 +940,15 @@ def showApprovedby(request, approved_by):
 
 
 
+def getTotalNewTicketNumber(request):
+    NumberOfTicket = TicketModel.objects.filter(status="New")
+    nofticket = len(NumberOfTicket)
+    new_request = UserModel.objects.filter(approved_by=None)
+    nofnewrequest = len(new_request)
+    closed_Ticket = TicketModel.objects.filter(status="Solved")
+    nofclosedticket = len(closed_Ticket)
+    data = {"nofTicket": nofticket, "nofNewRequest": nofnewrequest,  "nofClosedTicket": nofclosedticket}
+    return JsonResponse(data)
 
 
 
