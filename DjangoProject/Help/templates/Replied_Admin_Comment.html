@@ -123,8 +123,8 @@
 {% for i in Rdata %}
 {% if i.tReply.user.id == Rid %}
 <strong>Q.{{i.tReply.ticket.id}} {{i.tReply.ticket.question}}</strong>
-<p><strong>{{i.tReply.user.first_name}}: </strong>-{{i.tReply.reply_msg}} <sup>{{i.tReply.reply_date}}</sup></p>
-<p><strong>{{i.userm.first_name}}: </strong> {{i.rplymsg}}<sup> {{i.rplymsgdate}}</sup></p>
+<p><strong>{{i.tReply.id}}. {{i.tReply.user.first_name}}: </strong>-{{i.tReply.reply_msg}} <sup>{{i.tReply.reply_date}}</sup></p>
+    <p><strong>{{i.userm.first_name}}: </strong> {{i.rplymsg}}<sup> {{i.rplymsgdate}}</sup></p>
 <hr/>
 {% endif %}
 {% endfor %}

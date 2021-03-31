@@ -1065,6 +1065,7 @@ def ShowReplyMsgBusiness(request, id):
     ut = request.session.get('user_type')
     rid = request.session.get('id')
     msg = ""
+    rtor = ReplyToReply.objects.all()
     if request.method == 'POST':
         d = ReplyToReply()
         d.tReply_id = request.POST['reply_id']
@@ -1072,7 +1073,29 @@ def ShowReplyMsgBusiness(request, id):
         d.rplymsg = request.POST['rtor']
         d.rplymsgdate = datetime.today()
         d.save()
-    return render(request, 'Business_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg})
+        msg = "Reply sent...."
+        subject = "Tech Assist"
+        email_to = d.tReply.user.email
+        mail_body = "Hello"
+        html_message = """
+                                <div style="margin: 0; padding: 0; background: #91b5ec;">
+                                                    <div style=" border-radius: 30px;
+                                                box-shadow: 3px 3px 3px #b1b1b1,
+                                                        -3px -3px 3px #555;">
+                                            <img style="float: left;padding: 10px;" Tech Asisst src="https://www.invoid.co/assets/images/logo_dark_img.png" width="150px">
+                                            <ul style="text-align: center;">
+                                                <li style="display: inline-block; list-style: none; padding: 20px; font-size: 20px;"><strong>Tech Assist</strong></li>
+                                            </ul>
+                                        </div>
+
+                                        <div style="background-color:#f2f1ed; padding:10px;">
+
+                                """
+        q = f"<p>Hello <b>{d.tReply.user.first_name} {d.tReply.user.mid_name} {d.tReply.user.last_name} </b></p><p>Your message : {d.tReply.reply_msg} </p><p>Comment on<h3>Q.{d.tReply.ticket.id} {d.tReply.ticket.question}</h3></p><br/><br/><p>Replied by: <b>{d.userm.first_name} {d.userm.mid_name} {d.userm.last_name}</b> from <b>{d.userm.user_type}</b></p><p>Replied Message : {d.rplymsg}</p>"
+        html_message += (q + '</div></div>')
+        send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False,
+                  html_message=html_message)
+    return render(request, 'Business_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg, 'rtor':rtor})
 
 
 def ShowReplyMsgAdmin(request, id):
@@ -1084,6 +1107,7 @@ def ShowReplyMsgAdmin(request, id):
     Reply_data = TicketReply.objects.filter(ticket_id=id)
     data = request.session.get('name')
     ut = request.session.get('user_type')
+    rtor = ReplyToReply.objects.all()
     msg = ""
     if request.method == 'POST':
         d = ReplyToReply()
@@ -1114,7 +1138,7 @@ def ShowReplyMsgAdmin(request, id):
         html_message += (q + '</div></div>')
         send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False,
                   html_message=html_message)
-    return render(request, 'Admin_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg, 'rid':rid})
+    return render(request, 'Admin_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg, 'rid':rid, 'rtor':rtor})
 
 
 def ShowReplyMsgDeveloper(request, id):
@@ -1125,6 +1149,7 @@ def ShowReplyMsgDeveloper(request, id):
     Reply_data = TicketReply.objects.filter(ticket_id=id)
     data = request.session.get('name')
     ut = request.session.get('user_type')
+    rtor = ReplyToReply.objects.all()
     msg = ""
     if request.method == 'POST':
         d = ReplyToReply()
@@ -1155,7 +1180,7 @@ def ShowReplyMsgDeveloper(request, id):
         html_message += (q + '</div></div>')
         send_mail(subject, mail_body, 'helpdeskricla@gmail.com', [email_to], fail_silently=False,
                   html_message=html_message)
-    return render(request, 'Developer_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg})
+    return render(request, 'Developer_Ticket_Reply.html', {'Reply_data':Reply_data, 'data':data,'ut':ut, 'msg':msg, 'rtor':rtor})
 
 
 def RepliedAdminMsg(request):
@@ -1167,6 +1192,7 @@ def RepliedAdminMsg(request):
     data = request.session.get('name')
     ut = request.session.get('user_type')
     Rid = request.session.get('id')
+
     return render(request, 'Replied_Admin_Comment.html', {'Rdata':Rdata, 'Rid':Rid, 'data':data,'ut':ut})
 
 def RepliedDeveloperMsg(request):

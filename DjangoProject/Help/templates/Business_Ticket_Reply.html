@@ -73,8 +73,13 @@
     {{msg}}
     {% for i in Reply_data %}
     <div class="shadow-lg p-3">
-    <p><strong>{{i.ticket.id}} {{i.ticket.question}}</strong></p>
-        <p><strong>{{i.user.first_name}} {{i.user.mid_name}} {{i.user.last_name}}</strong><sup><small>{{i.user.user_type}}</small></sup>-: {{i.reply_msg}}</p>
+    <p class="text text-success"><strong>Q. {{i.ticket.id}} {{i.ticket.question}}</strong></p>
+        <p class="text text-success"><strong>{{i.user.first_name}} {{i.user.mid_name}} {{i.user.last_name}}</strong><sup><small class="text text-danger">{{i.user.user_type}}</small></sup>-: <b>{{i.reply_msg}}</b></p>
+        {% for j in rtor %}
+            {% if j.tReply.id == i.id %}
+        <p><strong>{{j.userm.id}}. {{ j.userm.first_name }}</strong><sub class="text text-muted"> {{ j.userm.user_type}}</sub>- <b>{{j.rplymsg}}</b><sup class="text text-muted">{{j.rplymsgdate}}</sup></p>
+            {% endif %}
+        {% endfor %}
         <form action="" method="post">
             {% csrf_token %}
             <input type="hidden" value="{{i.id}}" name="reply_id">
